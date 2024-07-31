@@ -7,13 +7,13 @@ on:
             - 10_infra/**
             - .github/workflows/**
     workflow_dispatch:
-    permissions:
+permissions:
         id-token: write
         contents: read
-    jobs:
-        preview:
-            name: "Preview"
-            runs-on: ubuntu-latest
-            steps:
-                - run: |
-                    echo "Hello World"
+jobs:
+    preview:
+        name: "Preview"
+        runs-on: ubuntu-latest
+        steps:
+            - run: |
+                echo "Hello World"
