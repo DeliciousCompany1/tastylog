@@ -49,7 +49,7 @@ resource "aws_db_subnet_group" "mysql_standalone_subnetgroup" {
 # RDS instance
 # ---------------------------------------------
 resource "aws_db_instance" "mysql_standalone" {
-  engine         = "MySQL"
+  engine = "MySQL"
   #engine_version = "8.0.28"
   engine_version = "8.0.37"
 
