@@ -101,7 +101,7 @@ jobs:
   deploy:
     name: Deploy
     needs: preview
-    if: needs.preview.outputs.TF_PLAN_EXITCODE == 3
+    #if: needs.preview.outputs.TF_PLAN_EXITCODE == 3
     environment: production
     runs-on: ubuntu-latest
     steps:
