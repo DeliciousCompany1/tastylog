@@ -62,7 +62,7 @@ jobs:
                     -no-color \
                     -detailed-exitcode
             - name: Slack Notify
-              #if: steps.plan.outputs.exitcode == 0
+              if: steps.plan.outputs.exitcode == 2
               uses: slackapi/slack-github-action@v1.26.0
               with:
                       channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
@@ -95,7 +95,7 @@ jobs:
     deploy:
       name: Deploy
       needs: preview
-      #if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
+      if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
       environment: production
       runs-on: ubuntu-latest
       steps:
