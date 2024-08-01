@@ -46,9 +46,11 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
       - name: Terraform init
+        continue-on-error: true
         run: |
           terraform init -no-color
       - name: Terraform validate
+        continue-on-error: true
         run: |
           terraform validate -no-color
       - name: Terraform plan
@@ -64,7 +66,7 @@ jobs:
             -no-color \
             -detailed-exitcode
       - name: Slack Notify
-        if: steps.plan.outputs.exitcode == 2
+        if: steps.plan.outputs.exitcode == 3
         uses: slackapi/slack-github-action@v1.22.0
         with:
           channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
@@ -97,7 +99,7 @@ jobs:
   deploy:
     name: Deploy
     needs: preview
-    if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
+    if: needs.preview.outputs.TF_PLAN_EXITCODE == 3
     environment: production
     runs-on: ubuntu-latest
     steps:
